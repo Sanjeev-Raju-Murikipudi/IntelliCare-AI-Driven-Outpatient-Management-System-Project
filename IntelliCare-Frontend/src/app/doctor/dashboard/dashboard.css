@@ -1,0 +1,77 @@
+/* Sidebar with gradient */
+.custom-sidebar {
+  background: linear-gradient(135deg, #a8d5ba, #9ad3ec);
+  color: #000; /* ✅ Set default text to black */
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+ 
+/* Sidebar header */
+.custom-sidebar h4 {
+  font-size: 1.4rem;
+  color: #000; /* ✅ Black heading */
+}
+ 
+ 
+/* Prevent layout shift when spinner appears */
+.logout-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px; /* Ensures consistent height */
+}
+ 
+/* Optional: subtle disabled styling */
+.logout-disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+ 
+/* Sidebar links */
+.sidebar-link {
+  color: #000; /* ✅ Black link text */
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+ 
+.sidebar-link:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* ✅ Light hover */
+  color: #000;
+}
+ 
+.sidebar-link.active {
+  background-color: #04516f;
+  color: #fff; /* ✅ White text on active green */
+}
+ 
+/* Logout link */
+.logout-link {
+  font-weight: 500;
+  color: #dc3545;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+ 
+.logout-link:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+ 
+ 
+.logout-link.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+ 
+.logout-link:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+ 
+ 

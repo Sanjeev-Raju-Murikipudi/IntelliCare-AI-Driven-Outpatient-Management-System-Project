@@ -1,0 +1,90 @@
+<div class="container py-5 about-hospital-section">
+    <div class="row justify-content-center d-lg-flex about-row align-items-center">
+ 
+        <div class="col-lg-4 col-md-10 order-1 image-column h-100">
+            <div class="image-wrapper shadow-lg">
+                <img src="https://t3.ftcdn.net/jpg/03/21/23/44/360_F_321234431_mKOXVBJ3e8IXtDm9vCAnC7uivMDZzaSc.jpg" alt="IntelliCare Doctors and Team" class="img-fluid rounded-3 h-100">
+            </div>
+        </div>
+ 
+        <div class="col-lg-8 col-md-10 order-2 d-flex align-items-start h-100">
+            <div class="info-content p-4">
+               
+                <!-- <h6 class="text-primary fw-bold">ABOUT US</h6> -->
+                <h2 class="display-5 fw-bolder mb-2">{{ hospitalName }}</h2>
+                <h4 class="text-muted mb-4 mt-4">{{ tagline }}</h4>
+               
+                <p class="lead mb-4">{{ summaryText }}</p>
+ 
+                <ul class="list-unstyled feature-list mb-4">
+                    <li *ngFor="let feature of features" class="mb-2">
+                        <i class="fas fa-check-circle text-primary me-2"></i> {{ feature }}
+                    </li>
+                </ul>
+ 
+                <h4 class="fw-bolder mt-4">Our Vision</h4>
+                <p>{{ visionText }}</p>
+ 
+                <button class="btn btn-primary btn-lg mt-3">Learn More</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="container2 pt-5 mt-5">
+   
+    <div class="row">
+        <div class="col-12">
+            <h2 class="section-title mb-4">WHY CHOOSE US</h2>
+        </div>
+    </div>
+   
+    <div class="row feature-row">
+        <div class="col-12 border-box-wrapper shadow-sm">
+           
+            <div class="row g-0">
+               
+                <div class="col-lg-4 col-md-12 feature-column"
+                     *ngFor="let benefit of benefits; let i = index"
+                     [class.border-end]="i < benefits.length - 1">
+                   
+                    <div class="p-4 feature-content">
+                        <h4 class="fw-bold">{{ benefit.title }}</h4>
+                        <p class="text-muted">{{ benefit.description }}</p>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="container3 py-5 mt-5">
+   
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="display-6 fw-bold text-center">Read Our Patient Reviews</h2>
+        </div>
+    </div>
+ 
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6" *ngFor="let review of reviews">
+            <div class="review-card p-4 shadow-sm h-100">
+               
+                <div class="d-flex align-items-center mb-3">
+                    <img [src]="review.photo" alt="{{ review.name }}" class="review-photo me-3">
+                    <div>
+                        <p class="fw-bold m-0">{{ review.name }}</p>
+                        <div class="star-rating">
+                            <i class="fas fa-star text-warning" *ngFor="let i of [].constructor(review.rating)"></i>
+                            <i class="far fa-star text-warning" *ngFor="let i of [].constructor(5 - review.rating)"></i>
+                        </div>
+                    </div>
+                </div>
+ 
+                <p class="review-text text-muted">"{{ review.review }}"</p>
+            </div>
+        </div>
+    </div>
+</div>
+ 

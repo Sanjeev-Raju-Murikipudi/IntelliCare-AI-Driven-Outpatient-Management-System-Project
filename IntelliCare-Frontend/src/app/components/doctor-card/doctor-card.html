@@ -1,0 +1,13 @@
+<div class="doctor-card" *ngIf="doctor">
+  <div class="card-image-container">
+    <img [src]="doctor.imageUrl" [alt]="'Dr. ' + doctor.name" class="doctor-image">
+  </div>
+  <div class="card-content">
+    <div class="availability">
+      <span class="status-dot" [class.available]="doctor.isAvailable"></span>
+      <span>{{ doctor.isAvailable ? 'Available' : 'Unavailable' }}</span>
+    </div>
+    <h3 class="doctor-name">{{ doctor.name }}</h3>
+    <p class="doctor-specialty">{{ doctor.specialty }}</p>
+  </div>
+</div>

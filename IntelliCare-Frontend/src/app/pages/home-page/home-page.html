@@ -1,0 +1,175 @@
+<main class="home-page-content">
+ 
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Book Appointment With Trusted Doctors</h1>
+      <p class="hero-subtitle">
+        Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+      </p>
+ 
+      <div class="doctor-avatars">
+        <img src='assets/images/doc6.png' alt="Doctor 1" class="avatar">
+        <img src='assets/images/doc5.png' alt="Doctor 2" class="avatar">
+        <img src='assets/images/doc14.png' alt="Doctor 3" class="avatar">
+        </div>
+ <button class="btn btn-white" [routerLink]="['/doctors']">
+  Book appointment <span class="arrow-right">→</span>
+</button>
+    </div>
+ 
+    <div class="hero-image-placeholder">
+      </div>
+  </section>
+ 
+  <section class="specialty-section">
+  <h2 class="section-title">Find by Specialty</h2>
+  <p class="section-subtitle">
+    Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+  </p>
+ 
+  <div class="specialty-list">
+    <div class="specialty-item">
+      <div class="specialty-icon-container primary-blue-bg">
+        <img src="https://cdn-icons-png.flaticon.com/256/4497/4497898.png" alt="General Physician Icon" class="specialty-icon">
+      </div>
+      <p class="specialty-name">General physician</p>
+    </div>
+ 
+    <div class="specialty-item">
+      <div class="specialty-icon-container secondary-blue-bg">
+        <img src="https://cdni.iconscout.com/illustration/premium/thumb/gynecologist-checking-pregnant-lady-illustration-svg-download-png-11639938.png%22" alt="Gynecologist Icon" class="specialty-icon">
+      </div>
+      <p class="specialty-name">Gynecologist</p>
+    </div>
+ 
+    <div class="specialty-item">
+      <div class="specialty-icon-container primary-blue-bg">
+        <img src="https://cdni.iconscout.com/illustration/premium/thumb/doctor-showing-skin-acne-problem-treatment-illustration-svg-download-png-10058502.png%22" alt="Dermatologist Icon" class="specialty-icon">
+      </div>
+      <p class="specialty-name">Dermatologist</p>
+    </div>
+ 
+    <div class="specialty-item">
+      <div class="specialty-icon-container secondary-blue-bg">
+        <img src="https://cdni.iconscout.com/illustration/premium/thumb/pediatrician-checking-up-kid-illustration-svg-download-png-6012613.png%22" alt="Pediatricians Icon" class="specialty-icon">
+      </div>
+      <p class="specialty-name">Pediatricians</p>
+    </div>
+ 
+    <div class="specialty-item">
+      <div class="specialty-icon-container primary-blue-bg">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn9ccdqhlRVLnQdycVmxjayl6woQ2koKOe_w&s" alt="Neurologist Icon" class="specialty-icon">
+      </div>
+      <p class="specialty-name">Neurologist</p>
+    </div>
+ 
+    <div class="specialty-item">
+      <div class="specialty-icon-container secondary-blue-bg">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnUgoE0DDsUKh8N7P5IY_x6xwn5JNJuIxIGg&s" alt="Gastroenterologist Icon" class="specialty-icon">
+      </div>
+      <p class="specialty-name">Gastroenterologist</p>
+    </div>
+  </div>
+</section>
+ 
+ 
+<!-- <section class="top-doctors-section">
+  <h2 class="section-title">Top Doctors to Book</h2>
+  <p class="section-subtitle">
+    Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+  </p>
+ 
+  <div class="doctor-grid">
+    <app-doctor-card *ngFor="let doctor of topDoctors" [doctor]="doctor"></app-doctor-card>
+  </div>
+</section> -->
+
+<section class="top-doctors-section">
+  <h2 class="section-title">Top Doctors to Book</h2>
+  <p class="section-subtitle">
+    Simply browse through our extensive list of trusted doctors, schedule your appointment hassle-free.
+  </p>
+
+  <div *ngIf="isLoading" class="text-center my-4">Loading doctors…</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div class="doctor-grid" *ngIf="!isLoading && !error">
+    <app-doctor-card
+      *ngFor="let doctor of topDoctors"
+      [doctor]="{
+        name: doctor.name || doctor.doctorName,
+        specialty: doctor.specialization || doctor.doctorSpecialization,
+        isAvailable: true,
+        imageUrl: doctor.photoUrl || doctor.doctorPhotoUrl || '/assets/images/default-doctor.png'
+      }"
+    ></app-doctor-card>
+  </div>
+</section>
+ 
+<!-- START: New More Doctors Button Block -->
+  <!-- <div class="more-doctors-container">
+    <button class="btn btn-more" [routerLink]="['/doctor-list']"></button> >
+   <a href="#" class="nav-link" >All Doctors -></a>
+    </button>
+  </div> -->
+  <!-- END: New More Doctors Button Block -->
+ 
+ 
+  <!-- START: New Create Account/CTA Section -->
+  <section class="call-to-action-section">
+    <div class="cta-box">
+      <div class="cta-content">
+        <h2 class="cta-title">Book Appointment With 100+ Trusted Doctors</h2>
+        <button class="btn btn-white cta-btn" routerLink="/register">
+          Create account
+        </button>
+
+         <!-- <button *ngIf="!isLoggedIn()" 
+            class="btn btn-primary me-2" 
+            routerLink="/register" >
+      Sign Up
+    </button> -->
+      </div>
+      <div class="cta-image-container">
+        <!-- Using a placeholder image path -->
+        <img src="/assets/images/doc1.png" alt="Doctor pointing" class="cta-doctor-image">
+      </div>
+    </div>
+  </section>
+ 
+ 
+  <div class="container3 py-5 mt-5">
+   
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="display-6 fw-bold text-center">Read Our Patient Reviews</h2>
+        </div>
+    </div>
+ 
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6" *ngFor="let review of reviews">
+            <div class="review-card p-4 shadow-sm h-100">
+               
+                <div class="d-flex align-items-center mb-3">
+                    <img [src]="review.photo" alt="{{ review.name }}" class="review-photo me-3">
+                    <div>
+                        <p class="fw-bold m-0">{{ review.name }}</p>
+                        <div class="star-rating">
+                            <i class="fas fa-star text-warning" *ngFor="let i of [].constructor(review.rating)"></i>
+                            <i class="far fa-star text-warning" *ngFor="let i of [].constructor(5 - review.rating)"></i>
+                        </div>
+                    </div>
+                </div>
+ 
+                <p class="review-text text-muted">"{{ review.review }}"</p>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ 
+ 
+ 
+  </main>
+ 
+ 

@@ -1,0 +1,40 @@
+<div class="otp-blur-wrapper d-flex justify-content-center align-items-center vh-100">
+  <div class="card otp-card shadow-lg p-4">
+    <h4 class="text-center mb-4 text-primary animate__animated animate__fadeInDown">
+      <i class="fas fa-key me-2"></i> Enter OTP
+    </h4>
+ 
+    <form #otpForm="ngForm" (ngSubmit)="onVerify(otpForm)">
+      <div class="mb-3">
+        <label for="otp" class="form-label text-dark">
+          <i class="fas fa-shield-alt me-2"></i> OTP Code
+        </label>
+        <input
+          type="text"
+          id="otp"
+          name="otp"
+          class="form-control"
+          required
+          pattern="^[0-9]{6}$"
+          ngModel
+          [ngClass]="{ 'is-invalid': otpForm.submitted && otpForm.controls['otp']?.invalid }"
+        />
+        <div *ngIf="otpForm.submitted && otpForm.controls['otp']?.invalid" class="invalid-feedback">
+          Enter a valid 6-digit OTP.
+        </div>
+      </div>
+ 
+      <button
+        type="submit"
+        class="btn btn-success w-100 d-flex justify-content-center align-items-center"
+        [disabled]="!otpForm.valid || loading"
+      >
+        <span *ngIf="!loading"><i class="fas fa-check-circle me-2"></i>Verify OTP</span>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm text-light me-2" role="status"></span>
+        <span *ngIf="loading">Verifying...</span>
+      </button>
+    </form>
+  </div>
+</div>
+ 
+ 

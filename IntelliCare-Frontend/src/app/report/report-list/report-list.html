@@ -1,0 +1,84 @@
+<div class="container my-5">
+  <h2 class="mb-4 text-primary">📋 All Reports</h2>
+ 
+  <!-- Filter Section -->
+ <div class="row g-3 align-items-end mb-4 p-3 bg-light rounded shadow-sm border">
+  <div class="col-md-4">
+    <label for="filterType" class="form-label fw-semibold text-secondary">📂 Filter by Type</label>
+    <div class="input-group">
+      <span class="input-group-text bg-white">🧾</span>
+      <select id="filterType" class="form-select" [(ngModel)]="filterType">
+        <option value="">-- All Types --</option>
+        <option value="REVENUE">Revenue</option>
+        <option value="UTILIZATION">Utilization</option>
+        <option value="PATIENTFLOW">Patientflow</option>
+        <option value="PREDICTIVE">Predictive</option>
+      </select>
+    </div>
+  </div>
+ 
+  <div class="col-md-4">
+    <label for="filterID" class="form-label fw-semibold text-secondary">🔎 Filter by Report ID</label>
+    <div class="input-group">
+      <span class="input-group-text bg-white">#️⃣</span>
+      <input
+        id="filterID"
+        type="number"
+        class="form-control"
+        [(ngModel)]="filterID"
+        placeholder="e.g. 18"
+      />
+    </div>
+  </div>
+ 
+  <div class="col-md-4 d-grid">
+    <button class="btn btn-primary fw-semibold" (click)="applyFilters()">
+      🔍 Apply Filters
+    </button>
+  </div>
+</div>
+ 
+ 
+  <!-- Loading and Error Messages -->
+  <div *ngIf="isLoading" class="alert alert-info shadow-sm">
+    ⏳ Loading reports...
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger shadow-sm">
+    ❌ {{ errorMessage }}
+  </div>
+ 
+  <!-- Report Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle shadow-sm">
+      <thead class="table-light text-center">
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Generated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports" class="text-center">
+          <td class="fw-bold text-primary">{{ report.reportID }}</td>
+          <td>
+            <span class="badge bg-secondary text-uppercase px-3 py-1">
+              {{ report.type }}
+            </span>
+          </td>
+          <td class="text-muted">{{ report.generatedDate | date: 'medium' }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-success me-2" (click)="viewReport(report.reportID)">
+              👁️ View
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteReport(report.reportID)">
+              🗑️ Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+ 
+ 

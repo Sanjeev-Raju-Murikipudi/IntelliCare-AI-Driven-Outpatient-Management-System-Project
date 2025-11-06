@@ -1,0 +1,54 @@
+<!-- Loading Spinner -->
+<div *ngIf="isLoading" class="text-center my-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+ 
+<!-- Report Detail Box -->
+<div class="container my-5" *ngIf="reportDetail">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <!-- Report Metadata -->
+      <h2 class="card-title text-primary mb-3">📊 Report {{ reportDetail.reportID }}</h2>
+<p><strong>Type:</strong> {{ reportDetail.type | titlecase }}</p>
+<p><strong>Generated:</strong> {{ reportDetail.generatedDate | date: 'medium' }}</p>
+ 
+ 
+      <hr class="my-4" />
+ 
+      <!-- Metrics Section -->
+      <h4 class="text-secondary mb-3">📈 Metrics</h4>
+      <div class="row">
+        <div class="col-md-6 mb-3" *ngFor="let metric of parsedMetrics">
+          <div class="border rounded p-3 bg-light d-flex justify-content-between align-items-center">
+            <div class="fw-semibold">{{ metric.Label }}</div>
+            <div class="text-primary fs-5">
+              {{ metric.Value }} <small class="text-muted">{{ metric.Unit }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    <h4 class="text-secondary mt-4 mb-2">🧠 Forecast Source</h4>
+ 
+<!-- If ForecastBasis is available -->
+<div class="alert alert-info" *ngIf="parsedDetails.ForecastBasis">
+  {{ parsedDetails.ForecastBasis }}
+</div>
+ 
+<!-- If ForecastBasis is missing, show raw JSON -->
+<div class="card bg-light border-0 mb-3" *ngIf="!parsedDetails.ForecastBasis">
+  <div class="card-body">
+ 
+    <pre class="mb-0 text-muted small">{{ reportDetail.detailedDataJson }}</pre>
+  </div>
+</div>
+ 
+ 
+ 
+    </div>
+  </div>
+</div>
+ 
+ 

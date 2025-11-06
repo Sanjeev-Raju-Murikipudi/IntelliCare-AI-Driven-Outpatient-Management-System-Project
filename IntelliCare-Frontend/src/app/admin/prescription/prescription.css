@@ -1,0 +1,15 @@
+.prescription-container {
+  padding: 20px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+input, select {
+  width: 100%;
+}

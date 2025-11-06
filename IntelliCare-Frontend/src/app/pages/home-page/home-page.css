@@ -1,0 +1,323 @@
+/* Variables were removed and colors replaced */
+ 
+.home-page-content {
+  padding: 20px 50px; /* Main horizontal padding */
+}
+ 
+.hero-section {
+  background-color: #5b5cfd;
+  border-radius: 10px; /* Rounded corners for the container */
+  padding: 80px 50px 0; /* Top/Bottom padding, 0 for bottom because image extends */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 450px; /* Ensure it has a good height */
+  position: relative; /* Needed for image positioning */
+  overflow: hidden; /* Keeps the doctor image contained if it slightly overflows */
+}
+ 
+.hero-content {
+  color: rgb(252, 252, 252);
+  max-width: 50%;
+  z-index: 10; /* Keep content above the image placeholder */
+}
+ 
+.hero-title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+ 
+.hero-subtitle {
+  font-size: 18px;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+ 
+.doctor-avatars {
+  display: flex;
+  margin-bottom: 20px;
+}
+ 
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-right: -10px;
+  object-fit: cover;
+}
+ 
+.btn-white {
+  background-color: white;
+  color: #5b5cfd;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+.btn-white:hover {
+  background-color: #f0f0f0;
+}
+ 
+.arrow-right {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+ 
+.hero-image-placeholder {
+  /* Use a large background image here or a positioned <img> tag */
+  /* For the exact look, a large positioned image is best. */
+  /* Assuming the image (doctors with clipboard) is named 'hero-doctors.png' */
+ background-image: url('/assets/images/doc1.png'); /* Replace with your image path */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  width: 50%;
+  min-height: 450px;
+  position: absolute;
+  right: 50px; /* Align to the right padding */
+  bottom: 0;
+  transform: translateY(0); /* Adjust as needed to position the bottom of the image */
+}
+ 
+/* --- Section Headings --- */
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 10px;
+  color: #333;
+}
+ 
+.section-subtitle {
+  font-size: 16px;
+  text-align: center;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 50px; /* Center the subtitle and add space below */
+}
+ 
+ 
+/* --- Specialty Section Styling --- */
+.specialty-section {
+  padding: 50px 0;
+}
+ 
+.specialty-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Space between items */
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+ 
+
+.specialty-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  max-width: 120px;
+  transition: transform 0.3s;
+}
+.specialty-item:hover {
+  transform: translateY(-5px); /* Subtle lift effect on hover */
+}
+ 
+.specialty-icon-container {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  transition: box-shadow 0.3s;
+}
+ 
+.specialty-icon{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+ 
+/* Blue backgrounds for the icons */
+.primary-blue-bg, .secondary-blue-bg {
+  background-color: #e6e6ff; /* Light blue */
+}
+ 
+ 
+.icon-placeholder {
+  /* Styles for the image/icon inside the circle */
+  font-size: 40px;
+  /* Note: For the exact design, you would replace the emoji/text with actual SVG or image files. */
+  /* The 'Prescripto' design uses icons that match the specialty (e.g., a pregnant woman for Gynecologist) */
+  color: #5b5cfd;
+}
+ 
+.specialty-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+ 
+/* --- Top Doctors Section Styling --- */
+.top-doctors-section {
+  padding: 50px 0 80px;
+}
+ 
+.doctor-grid {
+  display: grid;
+  /* Creates a responsive grid: 4 columns on large screens, minimum width of each card is 250px */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px; /* Space between cards */
+  max-width: 1200px;
+  margin: 0 auto; /* Center the grid */
+  padding: 0 20px;
+}
+ 
+ 
+/* --- Styling for the More Doctors Button --- */
+.more-doctors-container {
+  display: flex;
+  justify-content: center; /* Center the button */
+  margin-top: 40px;
+}
+ 
+.btn-more {
+  /* Button Container Styles */
+  background-color: #e6e6ff; /* Light blue background */
+  border: none;
+  border-radius: 25px;
+  padding: 0; /* Remove padding from the button itself */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+ 
+.btn-more:hover {
+  background-color: #ccccff; /* Darker shade on hover */
+}
+ 
+.btn-more .nav-link {
+  /* Link Styles (to make it look like the button text) */
+  display: block; /* Makes the link fill the button area */
+  padding: 12px 40px; /* Apply the padding to the link, not the button */
+  text-decoration: none; /* Remove underline */
+  color: #5b5cfd;       /* Primary blue text color */
+  text-transform: capitalize;
+}
+ 
+.call-to-action-section {
+  padding: 80px 50px; /* Padding for the section outside the blue box */
+}
+ 
+.cta-box {
+  background-color: #5b5cfd; /* Primary blue background */
+  border-radius: 10px;
+  padding: 60px 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Crucial for containing the doctor image */
+}
+ 
+.cta-content {
+  color: white;
+  max-width: 50%;
+  z-index: 2;
+}
+ 
+.cta-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+ 
+.cta-btn {
+  /* Inherits from .btn-white but applies specific size */
+  padding: 15px 35px;
+  font-size: 18px;
+}
+ 
+.cta-image-container {
+  /* Positions the image on the right */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  z-index: 1;
+}
+ 
+.cta-doctor-image {
+  /* Scales the image to fit the design seen in the image */
+  height: 120%;
+  width: auto;
+  object-fit: cover;
+  transform: translateX(10%) translateY(10%);
+}
+ 
+ 
+/* --- REVIEWS STYLES --- */
+ 
+.review-card {
+    border: 1px solid #e6acac;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+ 
+.review-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
+.review-text {
+    /* Limit review text to 4 lines for consistent card height */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    min-height: 4.5rem; /* Ensure consistent height even if text is short */
+    font-style: italic;
+}
+ 
+.star-rating {
+    line-height: 1;
+}
+.star-rating i {
+    font-size: 0.9rem;
+}
+ 
+ 
+@media (max-width: 992px) {
+    /* Reset layout for the About Us block on mobile */
+    /* ... (Existing mobile rules for image-column and info-content) ... */
+   
+    /* Reduce the 70px gap to something manageable on small screens */
+    .container3 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+ 
+ 

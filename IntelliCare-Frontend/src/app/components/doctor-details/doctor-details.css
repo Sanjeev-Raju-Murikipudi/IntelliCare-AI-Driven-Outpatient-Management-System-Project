@@ -1,0 +1,106 @@
+/* Doctor Card Styling */
+.doctor-card {
+  border-radius: 15px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.doctor-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4facfe;
+}
+.doctor-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.verified-icon {
+  color: #4facfe;
+  font-size: 1.2rem;
+}
+.specialization {
+  color: #007bff;
+  font-weight: 500;
+}
+.experience-badge {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: #fff;
+}
+.fee {
+  font-size: 1rem;
+  font-weight: 500;
+}
+ 
+/* Booking Section */
+.section-title {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+ 
+/* Slot Container with Border */
+.slot-container {
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 15px;
+  background: #fafafa;
+  margin-bottom: 20px;
+}
+ 
+/* Day Buttons */
+.day-btn {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.day-btn.active {
+  background: #007bff;
+  color: #fff;
+}
+.day-btn:hover {
+  background: #4facfe;
+  color: #fff;
+}
+ 
+/* Slot Buttons */
+.slot-btn {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.slot-btn.active {
+  background: #007bff;
+  color: #fff;
+}
+.slot-btn:hover {
+  background: #4facfe;
+  color: #fff;
+}
+ 
+/* Reason Box */
+.reason-box {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+ 
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background 0.3s ease;
+}
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+}

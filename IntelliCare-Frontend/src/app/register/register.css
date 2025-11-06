@@ -1,0 +1,125 @@
+/* Page background: solid light color */
+
+body, .register-wrapper {
+
+  margin: 0;
+
+  padding: 0;
+
+  height: 100vh;
+
+  background-color: #f5f7fa; /* ✅ clean, non-gradient background */
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+
+}
+ 
+/* Gradient animation for the form card */
+
+.register-card {
+
+  width: 100%;
+
+  max-width: 400px;
+
+  background: linear-gradient(-45deg, #a8edea, #fed6e3, #71b4eb, #d1d7d2);
+
+  background-size: 400% 400%;
+
+  animation: gradientShift 5s ease infinite;
+
+  border-radius: 1rem;
+
+  padding: 2rem;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  color: #333;
+
+}
+ 
+/* Gradient animation keyframes */
+
+/* @keyframes gradientShift {
+
+  0% { background-position: 0% 50%; }
+
+  50% { background-position: 100% 50%; }
+
+  100% { background-position: 0% 50%; }
+
+} */
+ 
+/* Form controls */
+
+.form-control {
+
+  border-radius: 0.5rem;
+
+  border: 1px solid #ccc;
+
+  transition: box-shadow 0.3s ease;
+
+}
+ 
+.form-control:focus {
+
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+
+}
+ 
+/* Gradient button */
+
+.btn-gradient {
+
+  background: linear-gradient(to right, #cde3dc, #185a9d);
+
+  color: #fff;
+
+  font-weight: 500;
+
+  border: none;
+
+  padding: 0.6rem 1rem;
+
+  border-radius: 2rem;
+
+  transition: all 0.3s ease;
+
+}
+ 
+.btn-gradient:hover {
+
+  background: linear-gradient(to right, #185a9d, #43cea2);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+}
+ 
+/* Login link */
+
+.login-link {
+
+  color: #185a9d;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+}
+ 
+.login-link:hover {
+
+  text-decoration: underline;
+
+}
+
+ 

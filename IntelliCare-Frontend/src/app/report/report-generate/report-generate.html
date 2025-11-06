@@ -1,0 +1,120 @@
+<div class="container py-5">
+  <div class="card shadow-lg border-0">
+    <div class="card-header bg-gradient bg-primary text-white d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">📊 Generate Operational Report</h4>
+      <span class="badge bg-light text-primary fw-semibold">Analytics Dashboard</span>
+    </div>
+ 
+    <div class="card-body">
+      <form [formGroup]="reportForm" (ngSubmit)="submit()" class="needs-validation" novalidate>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <label for="reportType" class="form-label text-primary">Report Type <span class="text-danger">*</span></label>
+            <select id="reportType" class="form-select shadow-sm" formControlName="reportType">
+              <option value="">-- Select Report Type --</option>
+              <option value="revenue">💰 Revenue</option>
+              <option value="utilization">📊 Utilization</option>
+              <option value="patientflow">🚶‍♂️ Patientflow</option>
+              <option value="predictive">🔮 Predictive</option>
+            </select>
+          </div>
+ 
+          <div class="col-md-6">
+            <label for="doctorId" class="form-label text-success">Doctor ID</label>
+            <input type="number" id="doctorId" class="form-control shadow-sm"
+              formControlName="doctorId"
+              placeholder="Enter Doctor ID"
+              data-bs-toggle="tooltip"
+              title="Optional: Filter report by specific doctor">
+          </div>
+ 
+          <div class="col-md-6">
+            <label for="startDate" class="form-label text-info">Start Date <span class="text-danger">*</span></label>
+            <input type="date" id="startDate" class="form-control shadow-sm" formControlName="startDate">
+          </div>
+ 
+          <div class="col-md-6">
+            <label for="endDate" class="form-label text-warning">End Date <span class="text-danger">*</span></label>
+            <input type="date" id="endDate" class="form-control shadow-sm" formControlName="endDate">
+          </div>
+        </div>
+ 
+        <div class="mt-4 text-end">
+          <button type="submit" class="btn btn-warning px-4 py-2 me-2" [disabled]="reportForm.invalid || isSubmitting">
+            {{ isSubmitting ? '⏳ Generating...' : '🚀 Generate Report' }}
+          </button>
+          <button type="reset" class="btn btn-outline-secondary px-4 py-2">
+            🔄 Reset
+          </button>
+        </div>
+      </form>
+ 
+      <div *ngIf="responseMessage" class="mt-4">
+        <div [ngClass]="{
+          'alert alert-success animate__animated animate__fadeIn': responseMessage.startsWith('✅'),
+          'alert alert-danger animate__animated animate__shakeX': responseMessage.startsWith('❌')
+        }">
+          {{ responseMessage }}
+        </div>
+      </div>
+ 
+      <div *ngIf="reportSummary" class="mt-5">
+        <div class="card border-0 shadow-sm bg-light">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 text-primary">🧾 Report Summary</h5>
+            <span class="badge bg-success text-white">📄 {{ reportSummary.type | titlecase }}</span>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush mb-4">
+              <li class="list-group-item"><strong class="text-secondary">Report ID:</strong> {{ reportSummary.reportID }}</li>
+              <li class="list-group-item"><strong class="text-secondary">Generated:</strong> {{ reportSummary.generatedDate | date:'medium' }}</li>
+              <li class="list-group-item" *ngIf="reportSummary.detailedData?.targetDoctor">
+                <strong class="text-secondary">Doctor:</strong> {{ reportSummary.detailedData.targetDoctor }}
+              </li>
+              <li class="list-group-item" *ngIf="reportSummary.detailedData?.forecastBasis">
+                <strong class="text-secondary">📌 Forecast Source:</strong> {{ reportSummary.detailedData.forecastBasis }}
+              </li>
+            </ul>
+ 
+            <h6 class="text-success mb-3">📈 Metrics</h6>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Label</th>
+                    <th>Value</th>
+                    <th>Unit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let metric of reportSummary.metrics">
+                    <td>{{ metric.label }}</td>
+                    <td class="fw-bold text-primary">{{ metric.value }}</td>
+                    <td class="text-muted">{{ metric.unit }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+ 
+            <div *ngIf="chartData" class="mt-5">
+              <h6 class="text-info mb-3">📊 {{ reportSummary.type }} Chart</h6>
+              <div class="bg-white p-3 border rounded shadow-lg animate__animated animate__fadeInUp">
+                <canvas baseChart
+                  [data]="chartData.data"
+                  [type]="chartData.type"
+                  [options]="chartData.options"
+                  class="w-100">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted text-center small">
+            📍 Powered by IntelliCare Analytics · Last updated {{ reportSummary.generatedDate | date:'shortDate' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ 

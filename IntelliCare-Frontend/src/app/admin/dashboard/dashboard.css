@@ -1,0 +1,49 @@
+.card {
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-size: 1.5rem;
+}
+
+.card-icon-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-left: 15px;
+}
+
+.bg-success-subtle {
+  background-color: #d1e7dd;
+}
+
+.bg-primary-subtle {
+  background-color: #cfe2ff;
+}
+
+.bg-danger-subtle {
+  background-color: #f8d7da;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}

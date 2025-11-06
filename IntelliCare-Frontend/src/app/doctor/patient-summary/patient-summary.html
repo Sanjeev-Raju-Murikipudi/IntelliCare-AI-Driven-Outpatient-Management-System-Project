@@ -1,0 +1,21 @@
+<div class="card shadow p-4 mt-3" *ngIf="!loading && summary">
+  <h4 class="mb-3 text-primary"><i class="fas fa-user me-2"></i>Patient Summary</h4>
+ 
+  <div class="row">
+    <div class="col-md-6 mb-2"><strong>Full Name:</strong> {{ summary.fullName }}</div>
+    <div class="col-md-6 mb-2"><strong>Age:</strong> {{ summary.age }}</div>
+    <div class="col-md-6 mb-2"><strong>Gender:</strong> {{ summary.gender }}</div>
+    <div class="col-md-6 mb-2"><strong>Blood Group:</strong> {{ summary.bloodGroup }}</div>
+    <div class="col-md-6 mb-2"><strong>Phone Number:</strong> {{ summary.phoneNumber }}</div>
+    <div class="col-md-12 mt-3"><strong>Medical History:</strong>
+      <p class="mt-1">{{ summary.medicalHistory || 'No history available.' }}</p>
+    </div>
+  </div>
+</div>
+ 
+<div *ngIf="loading" class="text-center mt-5">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p class="mt-2">Loading patient summary...</p>
+</div>
+ 
+ 

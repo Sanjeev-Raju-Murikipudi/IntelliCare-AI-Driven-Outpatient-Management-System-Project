@@ -1,0 +1,205 @@
+.about-hospital-section {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+}
+ 
+/* * <<-- NEW RULE FOR 70PX GAP ON WIDE SCREENS -->> */
+@media (min-width: 1200px) { /* Applies to xl (1200px) and wider screens */
+    .container {
+        padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+}
+.about-row {
+    align-items: stretch; /* Ensures columns stretch to the height of the tallest item */
+}
+ 
+/* Image column styles (Left Side) - Padding creates the gap between image and text */
+.image-column {
+    padding-right: 20px;
+}
+ 
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+ 
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+ 
+/* Info content column styles (Right Side) - Padding balances the gap */
+.info-content {
+    padding-left: 20px;
+}
+.display-5 {
+    color: #3f51b5;
+}
+.feature-list li {
+    font-size: 14px;
+    color: #495057;
+}
+ 
+/* Responsive adjustment for small screens */
+@media (max-width: 992px) {
+    /* Reset layout to stack on mobile */
+    .image-column {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 25px;
+    }
+   
+    .info-content {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+   
+    /* Reset height constraints for mobile stacking */
+    .image-wrapper, .image-wrapper img {
+        height: auto;
+    }
+}
+ 
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #343a40;
+    /* Aligns the title with the content constrained by the container padding */
+    margin-left: 20px;
+    letter-spacing: 2px;
+}
+ 
+.border-box-wrapper {
+    /* Main container styling for the three boxes */
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+ 
+/* Styling for the individual columns */
+.feature-column {
+    /* Ensure the vertical border matches the Bootstrap style */
+    border-color: #dee2e6 !important;
+}
+ 
+.feature-content h4 {
+    color: #343a40;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+ 
+.feature-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+ 
+/* --- RESPONSIVE ADJUSTMENTS --- */
+ 
+@media (max-width: 992px) {
+    /* Reset layout for the About Us block on mobile */
+    .image-column {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 25px;
+    }
+   
+    .info-content {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+   
+    .image-wrapper, .image-wrapper img {
+        height: auto;
+    }
+   
+    /* Responsive: Why Choose Us */
+    .feature-column {
+        border-right: none !important;
+        /* Add a horizontal border for separation */
+        border-bottom: 1px solid #dee2e6;
+    }
+   
+    /* Remove the bottom border from the very last column */
+    .feature-column:last-child {
+        border-bottom: none;
+    }
+}
+ 
+.container2 {
+    /* Ensure it behaves like a container with automatic center margins */
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+   
+    /* Apply the required 40px fixed gap */
+    padding-left: 70px !important;
+    padding-right: 70px !important;
+}
+ 
+.container3 {
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 70px !important; /* 70px gap */
+    padding-right: 70px !important; /* 70px gap */
+    background-color: #ffffff;
+}
+ 
+/* --- ABOUT US STYLES --- */
+.about-row {
+    align-items: stretch;
+}
+/* ... (Rest of About Us and Why Choose Us styles here) ... */
+ 
+/* --- REVIEWS STYLES --- */
+ 
+.review-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+ 
+.review-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+ 
+.review-text {
+    /* Limit review text to 4 lines for consistent card height */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    min-height: 4.5rem; /* Ensure consistent height even if text is short */
+    font-style: italic;
+}
+ 
+.star-rating {
+    line-height: 1;
+}
+.star-rating i {
+    font-size: 0.9rem;
+}
+ 
+ 
+@media (max-width: 992px) {
+    /* Reset layout for the About Us block on mobile */
+    /* ... (Existing mobile rules for image-column and info-content) ... */
+   
+    /* Reduce the 70px gap to something manageable on small screens */
+    .container3 {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+ 

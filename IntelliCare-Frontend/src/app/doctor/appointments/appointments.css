@@ -1,0 +1,102 @@
+/* Full-page animated gradient background */
+.appointments-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #ebf2f4, #a6c5e6, #b8d6ec, #ccdaf3);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+ 
+/* Gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+ 
+/* Glass-style card container */
+.appointments-card {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  color: #d8e456;
+}
+ 
+/* Table styling */
+.modern-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: #ebe97a;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+ 
+.modern-table thead {
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  color: rgb(219, 237, 83);
+}
+ 
+.modern-table th {
+  padding: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+ 
+.modern-table td {
+  padding: 12px;
+  vertical-align: middle;
+  border-top: 1px solid #eee;
+}
+ 
+/* Button styling */
+.btn-gradient {
+  background: linear-gradient(to right, #b0deeb, #d2deec);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+ 
+.btn-gradient:hover {
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+ 
+.btn-outline-primary, .btn-outline-success, .btn-outline-warning {
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 12px;
+}
+ 
+.badge {
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+ 
+/* Alerts */
+.modern-alert {
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+/* Icon spacing */
+.me-2 {
+  margin-right: 8px;
+}
+ 
+ 

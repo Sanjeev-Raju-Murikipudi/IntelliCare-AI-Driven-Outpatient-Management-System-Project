@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <h4 class="text-primary mb-4">
+    <i class="fas fa-notes-medical me-2"></i> Record Consultation
+  </h4>
+ 
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center mt-4">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Loading consultation...</p>
+  </div>
+ 
+  <!-- Error -->
+  <div *ngIf="error" class="alert alert-danger mt-3">
+    <i class="fas fa-exclamation-circle me-2"></i> {{ error }}
+  </div>
+ 
+  <!-- Prescription View -->
+  <div *ngIf="!loading && prescription" class="card shadow-sm mt-4 p-4">
+    <h5 class="text-success mb-3">
+      <i class="fas fa-prescription-bottle-alt me-2"></i> Prescription Generated
+    </h5>
+    <p><strong>Hospital:</strong> {{ prescription.hospitalName }}</p>
+    <p><strong>Patient:</strong> {{ prescription.patientName }}</p>
+    <p><strong>Doctor:</strong> {{ prescription.doctorName }} ({{ prescription.doctorSpecialty }})</p>
+    <p><strong>Date:</strong> {{ prescription.prescriptionDate | date:'medium' }}</p>
+    <p><strong>Medication:</strong> {{ prescription.medicationDetails }}</p>
+    <p><strong>Pharmacy Status:</strong> {{ prescription.pharmacyStatus }}</p>
+    <p><strong>Delivery ETA:</strong> {{ prescription.deliveryETA || 'Not scheduled' }}</p>
+  </div>
+ 
+  <!-- Consultation Form -->
+  <form (ngSubmit)="submitConsultation()" *ngIf="!loading && !prescription">
+    <input type="hidden" [value]="dto.appointmentId" />
+    <div class="mb-3">
+      <label class="form-label">Notes</label>
+      <textarea class="form-control" [(ngModel)]="dto.notes" name="notes" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Diagnosis</label>
+      <input type="text" class="form-control" [(ngModel)]="dto.diagnosis" name="diagnosis" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Medication</label>
+      <input type="text" class="form-control" [(ngModel)]="dto.medication" name="medication" />
+    </div>
+    <button type="submit" class="btn btn-primary">
+      <i class="fas fa-paper-plane me-2"></i> Submit
+    </button>
+  </form>
+</div>
+ 
+ 

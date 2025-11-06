@@ -1,0 +1,143 @@
+/* Existing styles remain */
+.appointment-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease-in-out;
+  width: 100%;
+}
+.appointment-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+.doctor-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+ -bottom: 6px;
+}
+.badge {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 12px;
+}
+.btn i {
+  margin-right: 4px;
+}
+ 
+/* New Queue Position Styles */
+.queue-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.queue-badge {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+ 
+.queue-badge.highlight {
+  animation: pulse 1.5s infinite;
+}
+ 
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(79,172,254, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(79,172,254, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(79,172,254, 0); }
+}
+ 
+.queue-badge {
+  width: 36px;              /* Reduced size */
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6a00, #ee0979); /* Vibrant orange-pink gradient */
+  color: white;
+  font-size: 1rem;          /* Smaller font */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+ 
+.queue-badge.highlight {
+  animation: pulse 1.5s infinite;
+}
+ 
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(238,9,121, 0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(238,9,121, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(238,9,121, 0); }
+}
+ 
+ 
+ 
+.queue-highlight {
+  display: inline-block;
+  background-color: #ff4d4d; /* Bright red */
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-left: 8px;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+}
+ 
+ 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+}
+ 
+add this in my-appointments.css 
+.in-progress-badge {
+  background-color: #ff9800; /* Bright Orange */
+  color: #fff;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+  animation: glow 1.5s infinite;
+}
+ 
+ 
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(255, 152, 0, 0.8);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+    transform: scale(1);
+  }
+}
+ 

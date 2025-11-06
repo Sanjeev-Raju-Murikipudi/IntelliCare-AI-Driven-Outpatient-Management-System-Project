@@ -1,0 +1,220 @@
+/* Fixed Navbar */
+.navbar {
+
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Add spacing below navbar to avoid content overlap */
+body {
+  padding-top: 80px;
+}
+
+.logo-image {
+  height: 60px;
+  width: 150px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5b5cfd;
+  cursor: pointer;
+}
+
+.logo-text::before {
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#5b5cfd" width="24px" height="24px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm0-4H9V7h2v6zm4 0h-2V7h2v6z"/></svg>');
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.navbar-center ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-center li {
+  margin: 0 15px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: color 0.3s, border-bottom 0.3s;
+  text-transform: uppercase;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #5b5cfd;
+  border-bottom: 2px solid #5b5cfd;
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+
+.navbar-right button {
+  margin-left: 10px;
+}
+
+
+.btn-login {
+  background-color: green;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-signup {
+  background-color: blue;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-logout {
+  background-color: red;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-login:hover,
+.btn-signup:hover,
+.btn-logout:hover {
+  opacity: 0.85;
+}
+.btn-primary {
+  background-color: #5b5cfd;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #3f41c3;
+}
+
+.nav-link i {
+  font-size: 1.5rem;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.nav-link i:hover {
+  color: #0056b3;
+}
+
+.role-rect-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  height: 30px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #007bff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.role-rect-button i {
+  font-size: 16px;
+}
+
+.role-rect-button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.role-rect-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  height: 40px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #007bff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.role-rect-button i {
+  font-size: 16px;
+}
+
+.role-rect-button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+  .navbar-center ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar-right {
+    margin-top: 10px;
+  }
+}

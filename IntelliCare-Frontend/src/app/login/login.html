@@ -1,0 +1,62 @@
+<div class="login-wrapper">
+  <div class="login-card animate__animated animate__fadeInDown">
+    <h3 class="text-center mb-4 text-dark">
+      <i class="fas fa-sign-in-alt me-2"></i> Login
+    </h3>
+ 
+    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">
+          <i class="fas fa-user me-2"></i> Username
+        </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          required
+          minlength="4"
+          ngModel
+          [ngClass]="{ 'is-invalid': loginForm.submitted && loginForm.controls['username']?.invalid }"
+        />
+        <div *ngIf="loginForm.submitted && loginForm.controls['username']?.invalid" class="invalid-feedback">
+          Username is required (min 4 characters).
+        </div>
+      </div>
+ 
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock me-2"></i> Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+          minlength="6"
+          ngModel
+          [ngClass]="{ 'is-invalid': loginForm.submitted && loginForm.controls['password']?.invalid }"
+        />
+        <div *ngIf="loginForm.submitted && loginForm.controls['password']?.invalid" class="invalid-feedback">
+          Password must be at least 6 characters.
+        </div>
+      </div>
+ 
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="btn btn-gradient w-100 d-flex justify-content-center align-items-center"
+        [disabled]="!loginForm.valid"
+      >
+        <span *ngIf="!loading"><i class="fas fa-sign-in-alt me-2"></i> Login</span>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm text-light me-2" role="status"></span>
+        <span *ngIf="loading">Logging in...</span>
+      </button>
+    </form>
+  </div>
+</div>
+ 
+ 

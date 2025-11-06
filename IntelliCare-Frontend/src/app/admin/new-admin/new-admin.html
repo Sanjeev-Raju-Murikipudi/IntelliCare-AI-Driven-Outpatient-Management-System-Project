@@ -1,0 +1,27 @@
+<div class="admin-form-container">
+  <h2>Create New Admin</h2>
+
+  <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+    <label>Username:</label>
+    <input formControlName="username" type="text" />
+
+    <label>Password:</label>
+    <input formControlName="password" type="password" />
+
+    <label>Mobile Number:</label>
+    <input formControlName="mobileNumber" type="text" />
+
+    <label>Name:</label>
+    <input formControlName="name" type="text" />
+
+    <label>Admin Creation Key:</label>
+    <input formControlName="adminCreationKey" type="text" />
+
+    <label>Contact Email:</label>
+    <input formControlName="contactEmail" type="email" />
+
+    <button type="submit" [disabled]="adminForm.invalid">Create Admin</button>
+  </form>
+
+  
+</div>

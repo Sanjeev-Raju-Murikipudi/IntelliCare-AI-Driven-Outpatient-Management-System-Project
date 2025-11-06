@@ -1,0 +1,68 @@
+<div class="doctor-list-container">
+  <h2 class="mb-4">All Doctors</h2>
+
+  <!-- Filter Panel -->
+  <div class="filter-panel p-3 mb-4 rounded-3">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Doctor Name</label>
+        <input type="text" class="form-control" [(ngModel)]="filterDoctorName" placeholder="Search by name">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Specialization</label>
+        <input type="text" class="form-control" [(ngModel)]="filterSpecialization" placeholder="Search by specialization">
+      </div>
+    </div>
+
+    <div class="mt-3 text-end">
+      <button class="btn btn-primary btn-sm px-3" (click)="clearFilters()">
+        <i class="bi bi-x-circle"></i> Clear Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading/Error -->
+  <div *ngIf="loading" class="loading">Loading doctors...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- Doctor Cards -->
+  <div class="card-grid" *ngIf="!loading && paginatedDoctors.length > 0">
+    <div class="doctor-card" *ngFor="let doctor of paginatedDoctors">
+      <img [src]="doctor.photoUrl || 'assets/default-doctor.png'" alt="Doctor Photo" class="doctor-photo" />
+
+      
+      <div class="doctor-info">
+        <h3>{{ doctor.name }}</h3>
+        <p><strong>Specialization:</strong> <span class="badge bg-info text-dark">{{ doctor.specialization }}</span></p>
+        <p><strong>Experience:</strong> {{ doctor.experienceYears }} years</p>
+        <p><strong>Education:</strong> {{ doctor.education }}</p>
+        <p><strong>Address:</strong> {{ doctor.address }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Data -->
+  <div *ngIf="!loading && paginatedDoctors.length === 0" class="no-data">
+    No doctors found.
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-4" *ngIf="totalPages > 1">
+    <nav>
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+        </li>
+
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="currentPage === i + 1">
+          <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+        </li>
+
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

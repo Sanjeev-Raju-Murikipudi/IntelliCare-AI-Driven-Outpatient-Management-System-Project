@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.toast-top-right {
+  top: 20px;
+  right: 20px;
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+ 
+/* Toast container styling */
+.custom-toast {
+ background: linear-gradient(135deg, #d1dee1, #8fabee) !important;
+ /* Light gradient */
+  color: #2c3e50 !important; /* Consistent dark text */
+  border-radius: 10px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 600; /* Bold but not heavy */
+  letter-spacing: 0.3px; /* Adds thin elegance */
+  padding: 14px 20px !important;
+  border-left: 6px solid #47dc42 !important;
+  animation: slideFadeIn 0.4s ease-out;
+  transition: transform 0.3s ease;
+}
+ 
+/* Close button styling */
+.custom-toast .toast-close-button {
+  color: #2c3e50 !important;
+  font-size: 18px;
+  opacity: 0.7;
+}
+ 
+/* Animation */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+ 
+ 
+ 
+ 

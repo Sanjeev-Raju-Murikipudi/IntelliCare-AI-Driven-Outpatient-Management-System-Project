@@ -1,0 +1,79 @@
+<div class="appointments-wrapper">
+  <div class="appointments-card shadow-lg p-4">
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center my-4">
+      <div class="spinner-border text-light" role="status"></div>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="success" class="alert alert-success modern-alert">
+      <i class="fas fa-check me-2"></i> {{ success }}
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="alert alert-danger modern-alert">
+      <i class="fas fa-exclamation-circle me-2"></i> {{ error }}
+    </div>
+
+    <!-- Section Title -->
+    <div *ngIf="!loading && !error && appointments.length > 0" class="mb-3">
+      <h5 class="text-secondary">
+        <i class="fas fa-calendar-day me-2"></i> Today's Appointments
+      </h5>
+    </div>
+
+    <!-- Appointments Table -->
+    <div class="table-responsive" *ngIf="!loading && !error && appointments.length > 0">
+      <table class="table modern-table text-dark">
+        <thead>
+          <tr>
+            <th><i class="fas fa-user"></i> Patient</th>
+            <th><i class="far fa-clock"></i> Time</th>
+            <th><i class="fas fa-info-circle"></i> Status</th>
+            <th><i class="fas fa-tasks"></i> Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appt of appointments">
+            <td>{{ appt.patientName }}</td>
+            <td>{{ appt.scheduledTime | date:'shortTime' }}</td>
+            <td>
+              <span class="badge bg-primary fw-normal text-light">{{ appt.status }}</span>
+            </td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm me-2" [routerLink]="['/doctor/patient-summary', appt.appointmentId]">
+                <i class="fas fa-file-medical"></i>Patient Summary
+              </button>
+              <button class="btn btn-outline-success btn-sm me-2" [routerLink]="['/doctor/consultation', appt.appointmentId]">
+                <i class="fas fa-stethoscope"></i> Consultation
+              </button>
+              <button
+                    *ngIf="appt.status?.toLowerCase() === 'inprogress' || appt.status?.toLowerCase() === 'booked'"
+
+                    class="btn btn-outline-warning btn-sm me-2"
+                    (click)="markComplete(appt.appointmentId)"
+                  >
+                  <i class="fas fa-check-circle"></i> Mark as Complete
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- No Appointments Message -->
+    <div *ngIf="!loading && !error && appointments.length === 0" class="alert alert-info modern-alert text-success bg-transparent border-success">
+      <i class="fas fa-calendar-times me-2"></i> No appointments found for today.
+    </div>
+
+    <!-- Load Button -->
+    <div class="text-end mt-3">
+      <button class="btn btn-gradient" (click)="loadAppointments()">
+        <i class="fas fa-sync-alt me-2"></i> Load Appointments
+      </button>
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,73 @@
+<h2 class="mb-4 fw-bold text-primary">All Appointments</h2>
+
+<!-- Filters -->
+<div class="row mb-3">
+  <div class="col-md-3">
+    <input type="text" class="form-control" placeholder="Search Patient" [(ngModel)]="searchPatient" (input)="applyFilters()">
+  </div>
+  <div class="col-md-3">
+    <input type="text" class="form-control" placeholder="Search Doctor" [(ngModel)]="searchDoctor" (input)="applyFilters()">
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" [(ngModel)]="searchStatus" (change)="applyFilters()">
+      <option value="">All Statuses</option>
+      <option value="Booked">Booked</option>
+      <option value="Cancelled">Cancelled</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </div>
+</div>
+
+<!-- Table -->
+<div class="card shadow-sm border-0">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Scheduled Time</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appt of pagedAppointments; let i = index">
+            <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+            <td>{{ appt.patientName }}</td>
+            <td>{{ appt.doctorName }}</td>
+            <td>{{ appt.reason }}</td>
+            <td>
+              <span class="badge bg-success" *ngIf="appt.status === 'Booked'">Booked</span>
+              <span class="badge bg-danger" *ngIf="appt.status === 'Cancelled'">Cancelled</span>
+              <span class="badge bg-info text-dark" *ngIf="appt.status === 'Completed'">Completed</span>
+            </td>
+            <td>
+              <i class="bi bi-calendar-event me-1 text-primary"></i>
+              {{ appt.scheduledTime | date: 'medium' }}
+            </td>
+            <td>₹{{ appt.amountPaid }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav *ngIf="totalPages.length > 1" class="mt-3">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="setPage(currentPage - 1)">Previous</button>
+        </li>
+        <li class="page-item" *ngFor="let page of totalPages" [class.active]="page === currentPage">
+          <button class="page-link" (click)="setPage(page)">{{ page }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages.length">
+          <button class="page-link" (click)="setPage(currentPage + 1)">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

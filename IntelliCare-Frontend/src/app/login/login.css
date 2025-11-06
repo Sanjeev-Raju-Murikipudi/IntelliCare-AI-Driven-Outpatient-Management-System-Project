@@ -1,0 +1,89 @@
+/* Page background: clean white */
+body, .login-wrapper {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+/* ✅ solid background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  background: transparent !important;
+}
+
+/* Full-page gradient background with blur */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* ✅ stays behind everything */
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #71b4eb, #a8edea);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+  filter: blur(20px) brightness(0.7);
+}
+
+
+/* Gradient animated login card with blur */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+ background: linear-gradient(-45deg, #a8edea, #fed6e3, #71b4eb, #d1d7d2);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+/* Gradient animation */
+/* @keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+} */
+
+/* Form controls */
+.form-control {
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Gradient button */
+/* Gradient login button with better contrast */
+.btn-gradient {
+  background: linear-gradient(to right, #cde3dc, #185a9d); /* ✅ Deep blue to teal */
+  color: #ffffff; /* ✅ Clear white text */
+  font-weight: 600;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect */
+.btn-gradient:hover {
+  background: linear-gradient(to right, #43cea2, #185a9d); /* ✅ Reverse gradient */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Spinner inside button */
+.btn-gradient .spinner-border {
+  width: 1rem;
+  height: 1rem;
+}
+
+

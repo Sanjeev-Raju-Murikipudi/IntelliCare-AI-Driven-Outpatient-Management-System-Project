@@ -1,0 +1,67 @@
+/* Container */
+.container {
+  max-width: 90vw;
+}
+ 
+/* Row spacing */
+.row.g-4 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+ 
+/* Doctor Card */
+.doctor-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+ 
+/* Doctor Image */
+.doctor-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 3px solid #4facfe;
+}
+ 
+/* Doctor Info */
+.doctor-name {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+.specialization {
+  color: #007bff;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.address {
+  font-size: 0.85rem;
+}
+ 
+/* Gradient Button */
+.btn-gradient {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background 0.3s ease;
+}
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+}
+ 

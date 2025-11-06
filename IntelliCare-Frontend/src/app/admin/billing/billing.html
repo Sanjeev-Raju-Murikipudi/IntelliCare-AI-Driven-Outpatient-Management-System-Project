@@ -1,0 +1,195 @@
+<div class="container-fluid py-4">
+  <div class="card shadow">
+    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+      <h3 class="card-title my-2">Billing - All Invoices</h3>
+      <button class="btn btn-warning" (click)="openCreateModal()">
+        <i class="bi bi-plus-circle me-1"></i> Create New Invoice
+      </button>
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="customAlertMessage" class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ customAlertMessage }}
+        <button type="button" class="btn-close" (click)="customAlertMessage = null" aria-label="Close"></button>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        <strong>Error:</strong> {{ errorMessage }}
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-panel p-3 mb-4 bg-light rounded-3 shadow-sm">
+        <div class="row align-items-end">
+          <div class="col-md-3 mb-3 mb-md-0">
+            <label for="filterId" class="form-label fw-bold small">Invoice ID</label>
+            <input type="text" class="form-control form-control-sm" id="filterId" placeholder="Search by ID" [(ngModel)]="filterInvoiceId">
+          </div>
+
+          <div class="col-md-3 mb-3 mb-md-0">
+            <label for="filterStatus" class="form-label fw-bold small">Amount Status</label>
+            <select id="filterStatus" class="form-select form-select-sm" [(ngModel)]="filterStatus">
+              <option value="">All Statuses</option>
+              <option value="Paid">Paid</option>
+              <option value="Due">Due</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 mb-3 mb-md-0">
+            <label for="filterClaimStatus" class="form-label fw-bold small">Claim Status</label>
+            <select id="filterClaimStatus" class="form-select form-select-sm" [(ngModel)]="filterClaimStatus">
+              <option value="">All Claim Statuses</option>
+              <option value="Approved">Approved</option>
+              <option value="Pending">Pending</option>
+              <option value="Denied">Denied</option>
+              <option value="No claim">No Claim</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <button class="btn btn-outline-secondary btn-sm w-100" (click)="clearFilters()">
+              <i class="bi bi-x-circle me-1"></i> Clear Filters ({{ filteredInvoices.length }})
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading" class="text-center p-5">
+        <div class="spinner-border text-secondary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2 text-secondary">Fetching invoice data...</p>
+      </div>
+
+      <!-- Invoice Table -->
+      <div *ngIf="!isLoading && !errorMessage" class="table-responsive">
+        <table class="table table-striped table-hover table-sm align-middle">
+          <thead class="bg-light">
+            <tr>
+              <th>ID</th>
+              <th>Patient ID</th>
+              <th>Amount</th>
+              <th>Insurance</th>
+              <th>Status</th>
+              <th>Claim Status</th>
+              <th class="text-center">Download Bill</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let invoice of filteredInvoices">
+              <td>#{{ invoice.invoiceID }}</td>
+              <!-- <td>{{ invoice.patientID }}</td> -->
+              <td>{{ patientNameMap[invoice.patientID] || 'Unknown' }}</td>
+              <td>₹{{ invoice.amount | number:'1.2-2' }}</td>
+              <td>{{ invoice.insuranceProvider }}</td>
+              <td>
+                <span class="badge"
+                      [ngClass]="{
+                        'bg-success': invoice.status === 'Paid',
+                        'bg-danger': invoice.status === 'Due'
+                      }">
+                  {{ invoice.status }}
+                </span>
+              </td>
+              <td>
+                <span class="badge"
+                      [ngClass]="{
+                        'bg-primary': invoice.claimStatus === 'Approved',
+                        'bg-info text-dark': invoice.claimStatus === 'Pending',
+                        'bg-secondary': invoice.claimStatus === 'No claim',
+                        'bg-dark': invoice.claimStatus === 'Denied'
+                      }">
+                  {{ invoice.claimStatus }}
+                </span>
+              </td>
+              <td class="text-center">
+                <button class="btn btn-outline-secondary" title="Download PDF" (click)="downloadPdf(invoice.invoiceID)">
+                  <i class="fa fa-download"></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr *ngIf="filteredInvoices.length === 0 && invoices.length > 0">
+              <td colspan="7" class="text-center text-muted p-4">
+                No invoices match your current filter criteria.
+              </td>
+            </tr>
+
+            <tr *ngIf="invoices.length === 0 && filteredInvoices.length === 0">
+              <td colspan="7" class="text-center text-muted p-4">
+                No invoices found. If your API is running and you are logged in as Admin, please check your database.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Invoice Modal -->
+<!-- Create Invoice Modal -->
+<div class="app-modal" [class.is-open]="isModalOpen">
+  <div class="app-modal-content card shadow">
+    <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">Create New Invoice</h4>
+      <button type="button" class="btn-close btn-close-white" (click)="closeCreateModal()" aria-label="Close"></button>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="saveInvoice()" #invoiceForm="ngForm">
+        
+        <!-- Patient Dropdown -->
+        <div class="mb-3">
+          <label for="patientSelect" class="form-label">Select Patient with Clinical Record</label>
+          <select class="form-select" id="patientSelect" [(ngModel)]="selectedPatient" name="selectedPatient" (change)="onPatientSelect()" required>
+            <option *ngFor="let p of eligiblePatients" [ngValue]="p">
+              {{ p.patientName }} - {{ p.doctorName }} (Record ID: {{ p.clinicalRecordId }})
+            </option>
+          </select>
+        </div>
+
+        <!-- Amount -->
+        <div class="mb-3">
+          <label for="amount" class="form-label">Amount <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" id="amount" name="amount" step="0.01" min="0.01" placeholder="e.g., 450.75" [(ngModel)]="newInvoice.amount" required>
+        </div>
+
+        <!-- Insurance Provider -->
+        <div class="mb-3">
+          <label for="insuranceProvider" class="form-label">Insurance Provider</label>
+          <input type="text" class="form-control" id="insuranceProvider" name="insuranceProvider" placeholder="e.g., Blue Cross" [(ngModel)]="newInvoice.insuranceProvider">
+        </div>
+
+        <!-- Status & Claim -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="status" class="form-label">Amount Status</label>
+            <select id="status" class="form-select" name="status" [(ngModel)]="newInvoice.status" required>
+              <option value="Paid">Paid</option>
+              <option value="Due">Due</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="claimStatus" class="form-label">Claim Status</label>
+            <select id="claimStatus" class="form-select" name="claimStatus" [(ngModel)]="newInvoice.claimStatus" required>
+              <option value="No claim">No claim</option>
+              <option value="Pending">Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Denied">Denied</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-end pt-3 border-top">
+          <button type="button" class="btn btn-outline-secondary me-2" (click)="closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!invoiceForm.valid || isSaving">
+            <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+            {{ isSaving ? 'Saving...' : 'Create Invoice' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

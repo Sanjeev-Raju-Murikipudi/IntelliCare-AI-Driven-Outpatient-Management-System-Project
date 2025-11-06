@@ -1,0 +1,120 @@
+.container-fluid {
+    min-height: 100vh;
+    background-color: #f8f9fa; 
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden; 
+}
+
+.card-title {
+    color: #0d6efd; 
+    font-weight: 600;
+}
+
+/* Enhancing Filter Section */
+.filter-panel {
+    border: 1px solid #dee2e6; /* Border for separation */
+    background-color: #f1f3f5 !important; /* Slightly darker background for contrast */
+}
+
+.filter-panel .form-label {
+    margin-bottom: 0.25rem; /* Tighter spacing for filter labels */
+    color: #495057;
+}
+
+.bg-light.rounded-3 {
+    background-color: #e9ecef !important;
+    border: 1px solid #dee2e6;
+}
+
+
+/* TABLE STYLES (Provided) */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+
+.table thead th {
+    font-weight: 700;
+    color: #495057; 
+    border-bottom: 2px solid #dee2e6;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.table tbody tr {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+}
+
+.table tbody tr:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    background-color: #fefefe;
+}
+
+.badge {
+    padding: 0.5em 0.7em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    min-width: 85px; 
+    display: inline-block;
+    text-align: center;
+}
+
+.table td:last-child {
+    white-space: nowrap; 
+}
+
+/* --- CREATE MODAL STYLES (New) --- */
+
+/* Modal Backdrop */
+.app-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050; /* Above typical Bootstrap modals */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.app-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Content Box */
+.app-modal-content {
+    background: white;
+    padding: 0;
+    border-radius: 0.75rem;
+    max-width: 600px;
+    width: 90%;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.app-modal.is-open .app-modal-content {
+    transform: translateY(0);
+}
+
+.app-modal-content .card-header {
+    border-bottom: none;
+    border-top-left-radius: 0.7rem;
+    border-top-right-radius: 0.7rem;
+}

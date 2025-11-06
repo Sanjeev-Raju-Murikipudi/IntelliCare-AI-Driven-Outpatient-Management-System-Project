@@ -1,0 +1,280 @@
+<div class="container-fluid py-4">
+  <h2 class="mb-4 text-primary">📊 Analytics Dashboard</h2>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'generate'" (click)="activeTab = 'generate'">Generate Report</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'list'" (click)="activeTab = 'list'">All Reports</a>
+    </li>
+    <li class="nav-item" *ngIf="activeTab === 'detail'">
+      <a class="nav-link active">Report Detail</a>
+    </li>
+  </ul>
+
+  <!-- Generate Report Section -->
+  <div *ngIf="activeTab === 'generate'">
+    <!-- Paste your Generate Report HTML here -->
+    <!-- ✅ Already working -->
+    <div class="container py-5">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-gradient bg-primary text-white d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">📊 Generate Operational Report</h4>
+          <span class="badge bg-light text-primary fw-semibold">Analytics Dashboard</span>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="reportForm" (ngSubmit)="submit()" class="needs-validation" novalidate>
+            <div class="row g-4">
+              <!-- Form fields -->
+              <div class="col-md-6">
+                <label for="reportType" class="form-label text-primary">Report Type <span class="text-danger">*</span></label>
+                <select id="reportType" class="form-select shadow-sm" formControlName="reportType">
+                  <option value="">-- Select Report Type --</option>
+                  <option value="revenue">💰 Revenue</option>
+                  <option value="utilization">📊 Utilization</option>
+                  <option value="patientflow">🚶‍♂️ Patientflow</option>
+                  <option value="predictive">🔮 Predictive</option>
+                </select>
+              </div>
+
+              
+           <div class="col-md-6">
+  <label for="doctorId" class="form-label text-success">Doctor</label>
+  <select id="doctorId" class="form-select shadow-sm"
+          formControlName="doctorId"
+          data-bs-toggle="tooltip"
+          title="Optional: Filter report by specific doctor">
+    <option value="">-- Select Doctor --</option>
+    <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+      {{ doctor.name }}
+    </option>
+  </select>
+</div>
+<!-- 
+              <div class="col-md-6">
+                <label for="doctorId" class="form-label text-success">Doctor ID</label>
+                <input type="number" id="doctorId" class="form-control shadow-sm"
+                  formControlName="doctorId"
+                  placeholder="Enter Doctor ID">
+              </div> -->
+
+              <div class="col-md-6">
+                <label for="startDate" class="form-label text-info">Start Date <span class="text-danger">*</span></label>
+                <input type="date" id="startDate" class="form-control shadow-sm" formControlName="startDate">
+              </div>
+
+              <div class="col-md-6">
+                <label for="endDate" class="form-label text-warning">End Date <span class="text-danger">*</span></label>
+                <input type="date" id="endDate" class="form-control shadow-sm" formControlName="endDate">
+              </div>
+            </div>
+
+            <div class="mt-4 text-end">
+              <button type="submit" class="btn btn-warning px-4 py-2 me-2" [disabled]="reportForm.invalid || isSubmitting">
+                {{ isSubmitting ? '⏳ Generating...' : '🚀 Generate Report' }}
+              </button>
+              <button type="reset" class="btn btn-outline-secondary px-4 py-2">
+                🔄 Reset
+              </button>
+            </div>
+          </form>
+
+          <!-- Response Message -->
+          <div *ngIf="responseMessage" class="mt-4">
+            <div [ngClass]="{
+              'alert alert-success animate__animated animate__fadeIn': responseMessage.startsWith('✅'),
+              'alert alert-danger animate__animated animate__shakeX': responseMessage.startsWith('❌')
+            }">
+              {{ responseMessage }}
+            </div>
+          </div>
+
+          <!-- Report Summary -->
+          <div *ngIf="reportSummary" class="mt-5">
+            <div class="card border-0 shadow-sm bg-light">
+              <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-primary">🧾 Report Summary</h5>
+                <span class="badge bg-success text-white">📄 {{ reportSummary.type | titlecase }}</span>
+              </div>
+              <div class="card-body">
+                <!-- Summary details -->
+                <ul class="list-group list-group-flush mb-4">
+                  <li class="list-group-item"><strong class="text-secondary">Report ID:</strong> {{ reportSummary.reportID }}</li>
+                  <li class="list-group-item"><strong class="text-secondary">Generated:</strong> {{ reportSummary.generatedDate | date:'medium' }}</li>
+                  <li class="list-group-item" *ngIf="reportSummary.detailedData?.targetDoctor">
+                    <strong class="text-secondary">Doctor:</strong> {{ reportSummary.detailedData.targetDoctor }}
+                  </li>
+                  <li class="list-group-item" *ngIf="reportSummary.detailedData?.forecastBasis">
+                    <strong class="text-secondary">📌 Forecast Source:</strong> {{ reportSummary.detailedData.forecastBasis }}
+                  </li>
+                </ul>
+
+                <!-- Metrics Table -->
+                <h6 class="text-success mb-3">📈 Metrics</h6>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Label</th>
+                        <th>Value</th>
+                        <th>Unit</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let metric of reportSummary.metrics">
+                        <td>{{ metric.label }}</td>
+                        <td class="fw-bold text-primary">{{ metric.value }}</td>
+                        <td class="text-muted">{{ metric.unit }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Chart -->
+                <div *ngIf="chartData" class="mt-5">
+                  <h6 class="text-info mb-3">📊 {{ reportSummary.type }} Chart</h6>
+                  <div class="bg-white p-3 border rounded shadow-lg animate__animated animate__fadeInUp">
+                    <canvas baseChart
+                      [data]="chartData.data"
+                      [type]="chartData.type"
+                      [options]="chartData.options"
+                      class="w-100">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-muted text-center small">
+                📍 Powered by IntelliCare Analytics · Last updated {{ reportSummary.generatedDate | date:'shortDate' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Reports Section -->
+  <div *ngIf="activeTab === 'list'">
+    <div class="container my-5">
+      <h2 class="mb-4 text-primary">📋 All Reports</h2>
+
+      <!-- Filter Section -->
+      <div class="row g-3 align-items-end mb-4 p-3 bg-light rounded shadow-sm border">
+        <div class="col-md-4">
+          <label for="filterType" class="form-label fw-semibold text-secondary">📂 Filter by Type</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white">🧾</span>
+            <select id="filterType" class="form-select" [(ngModel)]="filterType">
+              <option value="">-- All Types --</option>
+              <option value="REVENUE">Revenue</option>
+              <option value="UTILIZATION">Utilization</option>
+              <option value="PATIENTFLOW">Patientflow</option>
+              <option value="PREDICTIVE">Predictive</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="filterID" class="form-label fw-semibold text-secondary">🔎 Filter by Report ID</label>
+          <div class="input-group">
+            <span class="input-group-text bg-white">#️⃣</span>
+            <input
+              id="filterID"
+              type="number"
+              class="form-control"
+              [(ngModel)]="filterID"
+              placeholder="e.g. 18"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4 d-grid">
+          <button class="btn btn-primary fw-semibold" (click)="applyFilters()">
+            🔍 Apply Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading and Error Messages -->
+      <div *ngIf="isLoading" class="alert alert-info shadow-sm">
+        ⏳ Loading reports...
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger shadow-sm">
+        ❌ {{ errorMessage }}
+      </div>
+
+      <!-- Report Table -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle shadow-sm">
+          <thead class="table-light text-center">
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Generated</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of reports" class="text-center">
+              <td class="fw-bold text-primary">{{ report.reportID }}</td>
+              <td>
+                <span class="badge bg-secondary text-uppercase px-3 py-1">
+                  {{ report.type }}
+                </span>
+              </td>
+              <td class="text-muted">{{ report.generatedDate | date: 'medium' }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-success me-2" (click)="viewReport(report.reportID)">
+                  👁️ View
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteReport(report.reportID)">
+                  🗑️ Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Report Detail Section -->
+  <div *ngIf="activeTab === 'detail'">
+    <div class="container my-5" *ngIf="selectedReport">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-primary mb-3">📊 Report {{ selectedReport.reportID }}</h2>
+          <p><strong>Type:</strong> {{ selectedReport.type | titlecase }}</p>
+          <p><strong>Generated:</strong> {{ selectedReport.generatedDate | date: 'medium' }}</p>
+
+          <hr class="my-4" />
+
+          <h4 class="text-secondary mb-3">📈 Metrics</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3" *ngFor="let metric of parsedMetrics">
+              <div class="border rounded p-3 bg-light d-flex justify-content-between align-items-center">
+                <div class="fw-semibold">{{ metric.Label }}</div>
+                <div class="text-primary fs-5">
+                  {{ metric.Value }} <small class="text-muted">{{ metric.Unit }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="text-secondary mt-4 mb-2">🧠 Forecast Source</h4>
+          <div class="alert alert-info" *ngIf="parsedDetails.ForecastBasis">
+            {{ parsedDetails.ForecastBasis }}
+          </div>
+          <div class="card bg-light border-0 mb-3" *ngIf="!parsedDetails.ForecastBasis">
+            <div class="card-body">
+              <pre class="mb-0 text-muted small">{{ selectedReport.detailedDataJson }}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

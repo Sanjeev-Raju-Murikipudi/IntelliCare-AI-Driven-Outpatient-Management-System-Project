@@ -1,0 +1,93 @@
+<div class="profile-wrapper">
+  <div class="card profile-card shadow-lg border-0 rounded-4 p-4 animate__animated animate__fadeIn">
+    <!-- Header -->
+    <h4 class="text-dark fw-bold mb-4 border-bottom pb-2">
+      <i class="fa-solid fa-user me-2 text-primary"></i> Patient Profile
+    </h4>
+
+    <!-- View Mode -->
+    <div *ngIf="!editMode" class="animate__animated animate__fadeIn">
+      <div class="row g-4 text-dark">
+        <div class="col-md-6">
+          <p><i class="fa-solid fa-user text-dark me-2"></i><strong>Full Name:</strong> {{ profileData?.name  }}</p>
+
+          <p><i class="fa-solid fa-calendar-day me-2 text-dark"></i><strong>DOB:</strong> {{ profileData?.dob }}</p>
+          <p><i class="fa-solid fa-venus-mars me-2 text-dark"></i><strong>Gender:</strong> {{ profileData?.gender }}</p>
+          <p><i class="fa-solid fa-droplet me-2 text-dark"></i><strong>Blood Group:</strong> {{ profileData?.bloodGroup }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><i class="fa-solid fa-phone me-2 text-dark"></i><strong>Phone:</strong> {{ profileData?.phoneNumber }}</p>
+          <p><i class="fa-solid fa-envelope me-2 text-dark"></i><strong>Email:</strong> {{ profileData?.contactEmail }}</p>
+          <p><i class="fa-solid fa-location-dot me-2 text-dark"></i><strong>Address:</strong> {{ profileData?.address }}</p>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="mt-3">
+        <p><i class="fa-solid fa-file-medical me-2 text-dark"></i><strong>Medical History:</strong> {{ profileData?.medicalHistory }}</p>
+        <p><i class="fa-solid fa-shield-halved me-2 text-dark"></i><strong>Insurance Details:</strong> {{ profileData?.insuranceDetails }}</p>
+      </div>
+
+      <!-- Update Button -->
+      <div class="mt-4 text-end">
+        <button class="btn btn-outline-dark px-4 rounded-pill shadow-sm" (click)="enableEdit()">
+          <i class="fa-solid fa-pen-to-square text-dark me-2"></i> Update Profile
+        </button>
+      </div>
+    </div>
+
+    <!-- Edit Mode -->
+    <form *ngIf="editMode" [formGroup]="form" (ngSubmit)="submit()" class="animate__animated animate__fadeIn text-light">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold text-dark">Full Name</label>
+          <input formControlName="fullName" type="text" class="form-control shadow-sm" />
+
+          <label class="form-label fw-semibold mt-3 text-dark">Date of Birth</label>
+          <input formControlName="dob" type="date" class="form-control shadow-sm" />
+
+          <label class="form-label fw-semibold mt-3 text-dark">Gender</label>
+          <select formControlName="gender" class="form-select shadow-sm">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label fw-semibold text-dark">Blood Group</label>
+          <select formControlName="bloodGroup" class="form-select shadow-sm">
+            <option *ngFor="let group of bloodGroups" [value]="group">{{ group }}</option>
+          </select>
+
+          <label class="form-label fw-semibold mt-3 text-dark">Phone Number</label>
+          <input formControlName="phoneNumber" type="text" class="form-control shadow-sm" />
+
+          <label class="form-label fw-semibold mt-3 text-dark">Email</label>
+          <input formControlName="contactEmail" type="email" class="form-control shadow-sm" />
+        </div>
+      </div>
+
+      <label class="form-label fw-semibold mt-3 text-dark">Insurance Details</label>
+      <textarea formControlName="insuranceDetails" class="form-control shadow-sm" rows="2"></textarea>
+
+      <label class="form-label fw-semibold mt-3 text-dark">Medical History</label>
+      <textarea formControlName="medicalHistory" class="form-control shadow-sm" rows="3"></textarea>
+
+      <label class="form-label fw-semibold mt-3 text-dark">Address</label>
+      <textarea formControlName="address" class="form-control shadow-sm" rows="2"></textarea>
+
+      <!-- Buttons -->
+      <div class="mt-4 text-end">
+        <button type="submit" class="btn btn-warning px-4 rounded-pill shadow-sm" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+          Save Changes
+        </button>
+        <button type="button" class="btn btn-outline-dark ms-2 px-4 rounded-pill shadow-sm" (click)="cancelEdit()" [disabled]="loading">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+/* src/app/contact-us/contact-us.component.css */
+ 
+.contact-section {
+    background-color: #f8f9fa;
+}
+ 
+/* Ensure a fixed gap for the container at all sizes */
+.contact-container {
+    max-width: 1200px; /* Optional max-width for very large screens */
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 40px !important; /* Fixed left gap */
+    padding-right: 40px !important; /* Fixed right gap */
+}
+ 
+.contact-title {
+    color: #343a40;
+    letter-spacing: 2px;
+}
+ 
+/* Styling for the content row */
+.contact-content-row {
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+ 
+/* Image styling */
+.image-wrapper {
+    overflow: hidden;
+}
+ 
+.contact-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+ 
+/* Info styling */
+.info-heading {
+    color: #343a40;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+ 
+.contact-info-column p {
+    color: #6c757d;
+    font-size: 1rem;
+}
+ 
+.explore-btn {
+    border-radius: 4px;
+    padding: 10px 30px;
+    border-width: 2px;
+}
+ 
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .contact-container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+   
+    .contact-info-column {
+        margin-top: 30px;
+    }
+}
+ 

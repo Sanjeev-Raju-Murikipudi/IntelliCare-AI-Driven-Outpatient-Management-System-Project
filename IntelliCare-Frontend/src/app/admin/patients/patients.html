@@ -1,0 +1,86 @@
+<div class="container-fluid patient-list-container">
+  <h2 class="mb-4">All Patients</h2>
+
+  <!-- Filter Panel -->
+  <div class="filter-panel p-3 mb-4 rounded-3">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label">Patient Name</label>
+        <input type="text" class="form-control" [(ngModel)]="filterPatientName" placeholder="Search by name">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Gender</label>
+        <select class="form-select" [(ngModel)]="filterGender">
+          <option value="">All</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Blood Group</label>
+        <select class="form-select" [(ngModel)]="filterBloodGroup">
+          <option value="">All</option>
+          <option *ngFor="let group of ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']" [value]="group">{{ group }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-3 text-end">
+      <button class="btn btn-primary btn-sm px-3" (click)="clearFilters()">
+        <i class="bi bi-x-circle"></i> Clear Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading/Error -->
+  <div *ngIf="loading" class="loading">Loading patients...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- Patient Cards -->
+  <div class="card-grid" *ngIf="!loading && paginatedPatients.length > 0">
+    <div class="patient-card" *ngFor="let patient of paginatedPatients">
+      <div class="patient-info card p-3 mb-3">
+        <h3 class="card-title">{{ patient.name }}</h3>
+        <p><strong>Patient ID:</strong> {{ patient.patientId }}</p>
+        <p><strong>Email:</strong> {{ patient.contactEmail }}</p>
+        <p><strong>Phone:</strong> {{ patient.phoneNumber }}</p>
+        <p><strong>DOB:</strong> {{ patient.dob | date }}</p>
+        <p><strong>Age:</strong> {{ patient.age }}</p>
+        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+        <p><strong>Blood Group:</strong> {{ patient.bloodGroup }}</p>
+        <p><strong>Insurance:</strong> {{ patient.insuranceDetails }}</p>
+        <p><strong>Medical History:</strong> {{ patient.medicalHistory }}</p>
+        <p><strong>Address:</strong> {{ patient.address }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Data -->
+  <div *ngIf="!loading && paginatedPatients.length === 0" class="no-data">
+    No patients found.
+  </div>
+
+  <!-- Pagination -->
+<div class="d-flex justify-content-center mt-4" *ngIf="totalPages > 1">
+  <nav>
+    <ul class="pagination">
+      <!-- Previous Button -->
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+      </li>
+
+      <!-- Page Numbers -->
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+          [class.active]="currentPage === i + 1">
+        <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+      </li>
+
+      <!-- Next Button -->
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</div>

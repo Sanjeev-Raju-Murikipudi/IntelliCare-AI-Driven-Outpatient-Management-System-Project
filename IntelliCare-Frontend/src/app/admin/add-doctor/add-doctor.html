@@ -1,0 +1,69 @@
+<div class="page-wrapper">
+    <main class="form-card">
+        <header class="card-header">
+            <h1 class="card-title">Add New Doctor Account</h1>
+            <p class="card-subtitle">Complete the fields below to register a doctor.</p>
+        </header>
+
+        <div class="status-message status-success" *ngIf="statusMessage() && isSuccess()">
+            <p>{{ statusMessage() }}</p>
+        </div>
+        <div class="status-message status-error" *ngIf="statusMessage() && !isSuccess()">
+            <p>{{ statusMessage() }}</p>
+        </div>
+
+        <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+            <fieldset class="form-fields-grid">
+                <legend class="sr-only">Doctor Details</legend>
+
+                <div class="form-group">
+                    <label for="username" class="form-label">Username <span class="required">*</span></label>
+                    <input type="text" id="username" formControlName="Username" class="form-input"
+                        placeholder="Unique Doctor ID">
+                    <div class="validation-error" *ngIf="isInvalid('Username')">Username is required (max 50 characters).</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobileNumber" class="form-label">Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="mobileNumber" formControlName="MobileNumber" class="form-input"
+                        placeholder="10 digit number">
+                    <div class="validation-error" *ngIf="isInvalid('MobileNumber')">Mobile number must be exactly 10 digits.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactEmail" class="form-label">Contact Email <span class="required">*</span></label>
+                    <input type="email" id="contactEmail" formControlName="ContactEmail" class="form-input"
+                        placeholder="doctor@clinic.com">
+                    <div class="validation-error" *ngIf="isInvalid('ContactEmail')">A valid email address is required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Create Password <span class="required">*</span></label>
+                    <input type="password" id="password" formControlName="Password" class="form-input"
+                        placeholder="Min 6 characters">
+                    <div class="validation-error" *ngIf="isInvalid('Password')">Password is required (min 6 characters).</div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="creationKey" class="form-label">Doctor Creation Key <span class="required">*</span></label>
+                    <input type="password" id="creationKey" formControlName="DoctorCreationKey" class="form-input"
+                        placeholder="Internal Admin Key/Token">
+                    <div class="validation-error" *ngIf="isInvalid('DoctorCreationKey')">Creation key is required.</div>
+                </div>
+
+            </fieldset>
+
+            <footer class="card-footer">
+                <button type="submit" [disabled]="doctorForm.invalid || isLoading()" class="submit-button">
+                    <span *ngIf="isLoading()" class="button-content loading">
+                        <svg class="spinner" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
+                        Processing...
+                    </span>
+                    <span *ngIf="!isLoading()" class="button-content">
+                        Register Doctor
+                    </span>
+                </button>
+            </footer>
+        </form>
+    </main>
+</div>

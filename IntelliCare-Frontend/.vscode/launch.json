@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Edge with ng serve",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "npm: start",
+      "trace": true,
+      "sourceMaps": true,
+      "smartStep": true
+    },
+    {
+      "name": "Launch Edge with ng test",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:9876/debug.html",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "npm: test",
+      "trace": true,
+      "sourceMaps": true,
+      "smartStep": true
+    }
+  ]
+}

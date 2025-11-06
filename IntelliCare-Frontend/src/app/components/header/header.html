@@ -1,0 +1,72 @@
+<header class="navbar">
+  <div class="navbar-left">
+    <div class="logo">
+      <img src="https://intelicare.com.au/wp-content/uploads/inteli-logo-latest-1.png" alt="IntelliCare Logo" class="logo-image">
+ 
+    </div>
+  </div>
+
+  <nav class="navbar-center">
+    <ul>
+      <!-- Use routerLink to navigate -->
+      <li><a routerLink="/home" routerLinkActive="active" class="nav-link">Home</a></li>
+      <li><a routerLink="/doctors" class="nav-link">All Doctors</a></li>
+      <li><a routerLink="/about" class="nav-link">About</a></li>
+      <li><a routerLink="/contact" class="nav-link">Contact</a></li>
+      
+    
+     
+<!-- Role-based panel name -->
+      <li *ngIf="getRole() === 'admin'">
+  <a routerLink="/admin/dashboard" class="role-rect-button" title="Admin Panel">
+    <i class="fas fa-user-shield"></i>
+    <span>Admin</span>
+  </a>
+</li>
+<li *ngIf="getRole() === 'doctor'">
+  <a routerLink="/doctor/profile" class="role-rect-button" title="Doctor Dashboard">
+    <i class="fas fa-user-md"></i>
+    <span>Doctor</span>
+  </a>
+</li>
+<li *ngIf="getRole() === 'patient'">
+  <a routerLink="/patient/profile" class="role-rect-button" title="Patient Dashboard">
+    <i class="fas fa-user"></i>
+    <span>Patient</span>
+  </a>
+</li>
+    </ul>
+  </nav>
+
+ <div class="navbar-right">
+
+  <!-- 🔑 Show "Login" if NOT logged in -->
+  <a *ngIf="!isLoggedIn()" 
+     class="role-rect-button btn-login me-2" 
+     routerLink="/login" 
+     title="Login">
+    <i class="fas fa-sign-in-alt"></i>
+    <span>Login</span>
+  </a>
+
+  <!-- 🔑 Show "Sign Up" if NOT logged in -->
+  <a *ngIf="!isLoggedIn()" 
+     class="role-rect-button btn-signup me-2" 
+     routerLink="/register" 
+     title="Sign Up">
+    <i class="fas fa-user-plus"></i>
+    <span>Sign Up</span>
+  </a>
+
+  <!-- 🔒 Show "Logout" if logged in -->
+  <button *ngIf="isLoggedIn()" 
+          class="role-rect-button btn-logout" 
+          (click)="logout()" 
+          title="Logout">
+    <i class="fas fa-sign-out-alt"></i>
+    <span>Logout</span>
+  </button>
+</div>
+
+</header>
+

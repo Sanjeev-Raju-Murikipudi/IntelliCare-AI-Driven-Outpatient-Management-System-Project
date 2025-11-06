@@ -1,0 +1,120 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-primary fw-bold">
+    <i class="bi bi-calendar-check"></i> My Appointments
+  </h2>
+ 
+  <!-- Loading and Error Messages -->
+  <div *ngIf="isLoading" class="text-center text-muted">Loading…</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+ 
+  <!-- No Appointments -->
+  <div *ngIf="appointments.length === 0 && !isLoading" class="text-muted text-center">
+    <i class="bi bi-info-circle"></i> No appointments found.
+  </div>
+ 
+  <!-- Appointment Cards -->
+  <div class="row justify-content-center">
+    <div *ngFor="let ap of appointments" class="col-12 mb-3">
+      <div class="card appointment-card w-100 shadow-sm">
+        <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+          <!-- Doctor Info -->
+          <div class="d-flex align-items-start">
+            <img *ngIf="ap.doctorPhotoUrl || ap.doctorPhoto"
+                 [src]="ap.doctorPhotoUrl || ap.doctorPhoto"
+                 alt="Doctor photo"
+                 class="me-3 shadow doctor-img" />
+            <div>
+              <div><strong>Doctor:</strong> {{ ap.doctorName }}</div>
+              <div *ngIf="ap.doctorAddress"><strong>Address:</strong> {{ ap.doctorAddress }}</div>
+              <div><strong>Date/Time:</strong> {{ ap.date_Time | date:'short' }}</div>
+              <div>
+                <strong>Status:</strong>
+                <span class="badge"
+                      [ngClass]="{
+                        'bg-success': ap.status === 'Completed',
+                        'bg-info': ap.status === 'Booked',
+                        'in-progress-badge': ap.status === 'InProgress'
+                      }">{{ ap.status }}</span>
+              </div>
+             
+              <div *ngIf="ap.queuePosition !== undefined && ap.queuePosition !== null && ap.status !== 'Completed'">
+                <strong>Queue position:</strong>
+                <span class="queue-highlight">{{ ap.queuePosition }}</span>
+              </div>
+ 
+            </div>
+          </div>
+ 
+          <!-- Action Buttons (Hide if Completed) -->
+          <div class="text-end mt-3 mt-md-0" *ngIf="ap.status !== 'Completed'">
+            <button class="btn btn-sm btn-outline-danger me-2" (click)="openCancelModal(ap)">
+              <i class="bi bi-x-circle"></i> Cancel
+            </button>
+            <button class="btn btn-sm btn-outline-warning" (click)="showReschedule(ap)">
+              <i class="bi bi-arrow-repeat"></i> Reschedule
+            </button>
+          </div>
+        </div>
+ 
+        <!-- Reschedule Slots Section -->
+        <div *ngIf="selectedAppointment?.appointmentID === ap.appointmentID" class="mt-3 px-3">
+          <h5 class="text-secondary">Available Slots for {{ ap.doctorName }}</h5>
+          <div *ngIf="isSlotsLoading" class="text-muted">Loading slots...</div>
+          <div *ngIf="slotsError" class="alert alert-danger">{{ slotsError }}</div>
+ 
+          <ul class="list-group mb-2" *ngIf="availableSlots.length > 0">
+            <li *ngFor="let slot of availableSlots" class="list-group-item d-flex justify-content-between align-items-center">
+              {{ slot.date_Time | date:'short' }}
+              <button class="btn btn-sm btn-primary" (click)="openRescheduleModal(ap, slot.date_Time)">
+                <i class="bi bi-check-circle"></i> Select
+              </button>
+            </li>
+          </ul>
+ 
+          <div *ngIf="availableSlots.length === 0 && !isSlotsLoading" class="text-muted">
+            No slots available.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Reschedule Modal -->
+  <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-labelledby="rescheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rescheduleModalLabel">Reschedule Appointment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to reschedule this appointment to the selected slot?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-warning" (click)="confirmRescheduleAction()">Yes, Reschedule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Cancel Modal -->
+  <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cancelModalLabel">Cancel Appointment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to cancel this appointment?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger" (click)="confirmCancel()">Yes, Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
