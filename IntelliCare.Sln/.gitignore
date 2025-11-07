@@ -1,0 +1,28 @@
+# Visual Studio / build
+.vs/
+[Bb]in/
+[Oo]bj/
+*.suo
+*.user
+*.rsuser
+
+# Packages
+*.nupkg
+
+# Logs and temp
+Logs/
+*.log
+*.txt
+
+# Backend uploads and logs
+IntelliCare.Sln/IntelliCare.API/wwwroot/uploads/
+IntelliCare.Sln/IntelliCare.API/Logs/
+
+# Secrets and local settings
+appsettings.json
+appsettings.*.json
+secrets.json
+
+# Misc cache
+*.cache
+*.tmp

@@ -1,0 +1,6 @@
+@IntelliCare.API_HostAddress = http://localhost:5220
+
+GET {{IntelliCare.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
